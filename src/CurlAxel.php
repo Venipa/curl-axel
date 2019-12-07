@@ -113,6 +113,9 @@ class CurlAxel
     private function getFileSize()
     {
         $curl = new Curl();
+        if ($this->curlOptions != null && count($this->curlOptions) > 0) {
+            $curl->setOpts($this->curlOptions);
+        }
         $curl->head($this->url);
 
         if ($curl->error) {
