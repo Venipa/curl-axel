@@ -46,6 +46,10 @@ class CurlAxel
      */
     private $sliceCount = 5;
     /**
+     * @var array
+     */
+    private $curlOptions = null;
+    /**
      * @var
      */
     private $ranges;
@@ -127,7 +131,11 @@ class CurlAxel
     {
         $curl = new Curl();
         $curl->setUrl($this->url);
-        $curl->setOpts(self::$DEFAULT_OPTS);
+        if ($this->curlOptions != null && count($this->curlOptions) > 0) {
+            $curl->setOpts(array_replace_recursive($this->curlOptions, self::$DEFAULT_OPTS));
+        } else {
+            $curl->setOpts(self::$DEFAULT_OPTS);
+        }
         $curl->setOpt(CURLOPT_RANGE, $range);
 
         $curl = $this->chunkHandler->add($curl, $range);
@@ -176,6 +184,15 @@ class CurlAxel
     public function setChunkHandler(ChunkHandler $chunkHandler)
     {
         $this->chunkHandler = $chunkHandler;
+        return $this;
+    }
+    /**
+     * @param array $opts
+     * @return CurlAxel
+     */
+    public function setCurlOptions($opts)
+    {
+        $this->curlOptions = $opts;
         return $this;
     }
 
