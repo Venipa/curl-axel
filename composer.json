@@ -7,6 +7,12 @@
         {
             "name": "Jacer Omri",
             "email": "jaceromri@gmail.com"
+        },
+        {
+            "name": "Venipa",
+            "email": "admin@venipa.net",
+            "homepage": "https://venipa.net",
+            "role": "contributor"
         }
     ],
     "require": {
