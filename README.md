@@ -28,7 +28,12 @@ And use it
 ```php
 $c = CurlAxel\Factory::create()
     ->setUrl('http://ovh.net/files/1Mio.dat')
-    ->setOutput'download.dat');
+    ->setOutput('download.dat');
+
+// Set Additional Curl Options
+$c->setCurlOptions([
+    CURLOPT_SSL_VERIFYHOST => false // Disabling SSL Check
+]);
 
 $c->download();
 ```
